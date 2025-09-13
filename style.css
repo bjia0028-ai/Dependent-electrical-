@@ -1,0 +1,890 @@
+:root {
+    /* remove this whole :root and put in your global css file that's shared on all pages, then just remove this section
+from all other Stitches you add later, only need this once in your global stylesheet */
+    --primary: #ff6a3e;
+    --primaryLight: #ffba43;
+    --secondary: #ffba43;
+    --secondaryLight: #ffba43;
+    --headerColor: #1a1a1a;
+    --bodyTextColor: #4e4b66;
+    --bodyTextColorWhite: #fafbfc;
+    /* 13px - 16px */
+    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+    /* 31px - 49px */
+    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+    --bodyFontSize: 1rem;
+    /* 60px - 100px top and bottom */
+    --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
+}
+
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    /* prevents padding from affecting height and width */
+    box-sizing: border-box;
+}
+
+.cs-topper {
+    font-size: var(--topperFontSize);
+    line-height: 1.2em;
+    text-transform: uppercase;
+    text-align: inherit;
+    letter-spacing: .1em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.cs-title {
+    font-size: var(--headerFontSize);
+    font-weight: 900;
+    line-height: 1.2em;
+    text-align: inherit;
+    max-width: 43.75rem;
+    margin: 0 0 1rem 0;
+    color: var(--headerColor);
+    position: relative;
+}
+
+.cs-title-2 {
+    font-size: calc(var(--headerFontSize) / 2);
+    font-weight: 700;
+    line-height: 1.2em;
+    text-align: center;
+    max-width: 43.75rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--headerColor);
+    position: relative;
+}
+
+.cs-text {
+    font-size: var(--bodyFontSize);
+    line-height: 1.5em;
+    text-align: inherit;
+    width: 100%;
+    max-width: 40.625rem;
+    margin: 0;
+    color: var(--bodyTextColor);
+}
+
+/*-- -------------------------- -->
+<--- Report A Stitch -->
+    <--- -------------------------- -*/
+/* Success Modal */
+@media only screen and (min-width: 0em) {
+    .cs-report-button {
+        position: fixed;
+        background-color: #fff;
+        border: none;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        z-index: 10000;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        height: 2.875rem;
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 1.875rem;
+        padding: 0 1.5rem;
+        transition: transform 0.2s, color 0.3s, background-color 0.3s;
+    }
+
+    .cs-report-button:hover {
+        transform:
+            scale(1.1);
+        background-color: #0C293E;
+        color: #fff;
+    }
+
+    .cs-report-button:hover .light {
+        display: none;
+    }
+
+    .cs-report-button:hover .dark {
+        display: block;
+    }
+
+    .cs-report-button .dark {
+        display: none;
+    }
+
+    .cs-report-form {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        visibility: hidden;
+        transition:
+            opacity .3s, visibility .3s;
+        pointer-events: none;
+    }
+
+    .cs-report-form.cs-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+
+    .cs-report-form.cs-open .cs-form {
+        transform: translateY(0);
+    }
+
+    .cs-report-form .cs-form {
+        width: 90%;
+        max-width: 46.875rem;
+        /* 24px - 48px top and bottom */
+        /* 16px - 48px left and right */
+        padding:
+            clamp(1.5rem, 5.18vw, 3rem) clamp(1rem, 4vw, 3rem);
+        /* prevents flexbox from affecting height and width */
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content:
+            space-between;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        position: relative;
+        gap:
+            0.75rem;
+        transform: translateY(6.25rem);
+        transition: transform .3s;
+    }
+
+    .cs-report-form .closeReport {
+        font-size:
+            20px;
+        border: none;
+        width: 1.8em;
+        height: 1.8em;
+        background: #f1f1f3;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        position: absolute;
+        top: clamp(1.5rem, 5.18vw,
+                3rem);
+        right: clamp(1rem, 4vw, 3rem);
+        transition: filter .3s, transform .3s;
+    }
+
+    .cs-report-form .closeReport:hover {
+        filter: brightness(90%);
+        transform: rotate(90deg);
+    }
+
+    .cs-report-form h2 {
+        font-size:
+            1.5625rem;
+        text-align: left;
+    }
+
+    .cs-report-form p {
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        margin: 0 0 2rem 0;
+        max-width: 34.375rem;
+    }
+
+    .cs-report-form .cs-label {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        width: 100%;
+        color: var(--headerColor);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .cs-report-form .cs-input {
+        font-size: 1rem;
+        width: 100%;
+        height:
+            3.5rem;
+        padding: 0;
+        padding-left: 1.5rem;
+        color: var(--headerColor);
+        background-color: #F7F7F7;
+        border-radius:
+            0.5rem;
+        border: none;
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+    }
+
+    .cs-report-form .cs-input::placeholder {
+        color: #7D799C;
+        opacity: .6;
+    }
+
+    .cs-report-form .cs-textarea {
+        min-height: 7.5rem;
+        padding-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        font-family: inherit;
+    }
+
+    .cs-report-form .cs-button-solid {
+        font-size: 1rem;
+        line-height: 3.5rem;
+        text-decoration: none;
+        font-weight: 700;
+        overflow:
+            hidden;
+        margin: 0;
+        color: #fff;
+        padding: 0 3rem;
+        border-radius: 0.5rem;
+        background-color: #0C293E;
+        display:
+            inline-block;
+        position: relative;
+        z-index: 1;
+        transition: color .3s;
+    }
+
+    .cs-report-form .cs-button-solid:before {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: #1a1a1a !important;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: width .3s;
+    }
+
+    .cs-report-form .cs-button-solid:hover {
+        color: #0C293E;
+    }
+
+    .cs-report-form .cs-button-solid:hover:before {
+        width: 100%;
+    }
+
+    .cs-report-form .cs-submit {
+        width: 100%;
+        min-width: 12.5rem;
+        border: none;
+    }
+
+    .cs-report-form .cs-submit:hover {
+        color: #fff;
+        cursor: pointer !important;
+    }
+}
+
+/*-- -------------------------- -->
+        <--- Hero -->
+            <--- -------------------------- -*/
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #hero-1619 {
+        padding: var(--sectionPadding);
+        /* 200px - 300px - leaving extra space for the navigation
+                */
+        padding-top: clamp(12.5rem, 31.95vw, 18.75rem);
+        position: relative;
+        z-index: 1;
+    }
+
+    #hero-1619 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* 60px - 180px */
+        gap: clamp(1.75rem, 10vw, 4.25rem);
+    }
+
+    #hero-1619 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align:
+            center;
+        width: 100%;
+        max-width: 78.75rem;
+        display: flex;
+        flex-direction: column;
+        /* centers content
+                horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+
+    #hero-1619 .cs-topper {
+        /* 13px
+                - 16px */
+        font-size: clamp(0.8125rem, 1.5vw, 1rem);
+        line-height: 1.2em;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+        color:
+            var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        position:
+            relative;
+    }
+
+    #hero-1619 .cs-chevron {
+        --chevronColor: var(--primary);
+        width: 3rem;
+        height: auto;
+    }
+
+    #hero-1619 .cs-title {
+        /* 39px - 61px */
+        font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
+        font-weight:
+            700;
+        line-height: 1.2em;
+        text-align: inherit;
+        max-width: 100%;
+        margin: 0 0 0.5rem 0;
+        color: #fff;
+        position: relative;
+        text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #hero-1619 .cs-title-2 {
+        /* 39px -
+                61px */
+        font-size: clamp(1.4375rem, 6.4vw, 1.125rem);
+        font-weight: 700;
+        line-height: 1.2em;
+        text-align:
+            center;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 1.5rem 0;
+        color: #fff;
+        position: relative;
+        text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #hero-1619 .cs-text {
+        /* 16px - 20px */
+        font-size:
+            clamp(1rem, 1.95vw, 1.25rem);
+        line-height: 1.5em;
+        text-align: inherit;
+        width: 100%;
+        /* 464px - 622px */
+        max-width: clamp(29rem, 60vw, 38.785rem);
+        margin: 0 0 2.5rem 0;
+        color: #fff;
+    }
+
+    #hero-1619 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        margin: 0;
+        color: #fff;
+        padding: 0 1.5rem;
+        background-color:
+            var(--primary);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+    }
+
+    #hero-1619 .cs-button-solid:before {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: #000000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: width .3s;
+    }
+
+    #hero-1619 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+
+    #hero-1619 .cs-card-group {
+        margin: 0;
+        padding: 0;
+        width:
+            100%;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        /* 16px - 20px */
+        gap: clamp(1rem, 2.3vw,
+                1.25rem);
+    }
+
+    #hero-1619 .cs-item {
+        width: 100%;
+        text-align: left;
+        list-style: none;
+        margin: 0;
+        /* 24px -
+                32px */
+        padding: clamp(1.5rem, 3vw, 2rem);
+        background-color: #fff;
+        box-shadow: 0px 12px 80px 0px rgba(26, 26, 26, 0.08);
+        /* prevents padding from affecting height and width */
+        box-sizing: border-box;
+        border-radius: 10px;
+        grid-column: span 12;
+        grid-row: span 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    #hero-1619 .cs-banner-container {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* 60px - 180px */
+        gap: clamp(3.75rem, 13vw, 11.25rem);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        padding:
+            0px;
+        margin: 0px;
+        z-index: 2;
+    }
+
+    #hero-1619 .cs-banner {
+        width: 100%;
+        max-width: 80rem;
+        height: clamp(5.25rem, 6vw, 9rem);
+        text-align: left;
+        list-style: none;
+        margin: 0;
+        padding: 0px;
+        background-color: #fff;
+        box-sizing:
+            border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    #hero-1619 .cs-icon {
+        height: auto;
+        margin: 0 0 1.5rem 0;
+    }
+
+    #hero-1619 .cs-banner-icon {
+        height: 100%;
+        position: relative;
+        padding: 10px;
+        top: 0px;
+    }
+
+    #hero-1619 .cs-div-test {
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        position: relative;
+        flex-direction: column;
+    }
+
+    #hero-1619 .cs-h2 {
+        /* 20px - 25px */
+        font-size: clamp(1.85rem, 2.5vw, 2.5625rem);
+        line-height: 1em;
+    }
+
+    #hero-1619 .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+        line-height: 1.2em;
+        font-weight:
+            bold;
+        text-align: inherit;
+        margin: 0 0 1rem 0;
+        color: var(--headerColor);
+    }
+
+    #hero-1619 .cs-item-text {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        line-height: 1.5em;
+        max-width: 28.125rem;
+        margin: 0;
+        padding: 0;
+        color: var(--bodyTextColor);
+    }
+
+    #hero-1619 .cs-item-text-2 {
+        /* 14px - 16px */
+        font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+        line-height: 1.5em;
+        max-width: 80.125rem;
+        margin: 0;
+        padding: 0;
+        color: var(--bodyTextColor);
+    }
+
+    #hero-1619 .cs-background {
+        background:
+            url("./images/home-slide-02-lg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 15%;
+        display: block;
+        position: absolute;
+        top: 150px;
+        left: 0;
+        z-index: -2;
+    }
+
+    #hero-1619 .cs-background img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:
+            100%;
+        width: 100%;
+        object-fit: cover;
+        /* makes the top of the image start at the top of the parent */
+        object-position: top;
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #hero-1619 {
+        padding-bottom: 0;
+    }
+
+    #hero-1619 .cs-container {
+        align-items: flex-start;
+    }
+
+    #hero-1619 .cs-content {
+        text-align: center;
+        margin-left: 0;
+        align-items: flex-start;
+    }
+
+    #hero-1619 .cs-item {
+        grid-column: span 6;
+    }
+
+    #hero-1619 .cs-background {
+        height: 25%;
+    }
+
+    /* #hero-1619 .cs-background:before { background:
+                linear-gradient(90deg, #111926 21.41%, rgba(17, 25, 38, 0.72) 34.98%, rgba(17, 25, 38, 0) 62.53%);
+                opacity: 1; } */
+}
+
+/* Large Desktop - 1300px */
+@media only screen and (min-width: 81.25rem) {
+    #hero-1619 .cs-item {
+        grid-column: span 3;
+    }
+}
+
+/* Large Desktop Parallax Effect - 100px */
+@media only screen and (min-width: 100rem) {
+    #hero-1619 .cs-background {
+        background:
+            url("./images/home-slide-02-lg.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /* creates the parallax effect */
+        background-attachment: fixed;
+        height:
+            25%;
+    }
+
+    #hero-1619 .cs-background img {
+        display: none;
+    }
+}
+
+.cs-subtitle {
+    font-size: clamp(1.85rem, 2.5vw, 2.5625rem);
+    line-height: 1em;
+    font-weight: bold;
+    text-align: inherit;
+    margin: 0 0 1rem 0;
+    color: #a6c2f0;
+}
+
+.cs-button {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #ffba43;
+    width: 180px;
+    height: 50px;
+    position: relative;
+    border-radius: 8px;
+    border: none;
+    box-shadow: #cccfd4 0px 3px 6px, #cccfd4 0px 3px 2px;
+}
+
+.cs-button:hover {
+    background-color: #86ace1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: #cccfd4 0px 6px 12px, #cccfd4 0px 3px 2px;
+    transform: scale(1.05);
+    transition-duration: 0.4s;
+}
+
+.button-container {
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    display:
+        flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider {
+    width: 3px;
+    height: 30px;
+    background-color: #878787;
+}
+
+.ghost-btn {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 30px;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.ghost-btn:hover {
+    color: #9ac2ec;
+    transform: scale(1.1);
+}
+
+.ghost-btn:hover::after {
+    width: 100%;
+}
+
+#rotating-box {
+    width: 90%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #a6c2f0;
+    font-weight: 500;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #a6c2f0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 10px rgba(149, 149, 149, 0.2);
+    color: #6485b9;
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+#rotating-box strong {
+    display: block;
+    margin-top: 20px;
+    font-size: inherit;
+    font-style: italic;
+    font-weight: bold;
+    color: #6485b9;
+}
+
+.dots {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(152, 161, 192, 0.5);
+    border: orchid 1px solid;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+}
+
+.icon-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.icon-btn img {
+    width: 200%;
+    height: 95%;
+}
+
+.phone-number-container {
+    height: 100%;
+    width: 30%;
+    align-items: center;
+    justify-content: right;
+    display: flex;
+    font-weight: bold;
+    font-size: clamp(0.8rem, 1.4vw, 1.6rem);
+    color: #ffffff;
+}
+
+.phone-number {
+    color: rgb(255, 255, 255);
+    font-size: inherit;
+    margin-left: 8px;
+}
+
+.phone-number:hover {
+    color: rgb(138, 138, 138);
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.glass-background {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d9fcff, #bfdaff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-box {
+    width: 100%;
+    height: 100px;
+    padding: 20px 0px;
+    border-radius: 16px;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: #6485b9;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    border: 2px solid #a6c2f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+/* https: //codestitch.app/app/dashboard/stitches/1165 */
+@media only screen and (min-width: 0rem) {
+    #list-1165 {
+        max-width: 39.375rem;
+        margin: 0 0 2rem 0;
+        padding: 0;
+        /* clips the bullets to create the half circle */
+        overflow: hidden;
+    }
+
+    #list-1165 .cs-li {
+        list-style: none;
+        margin: 0 0 0.9rem 0;
+        color: var(--bodyTextColor);
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.85rem;
+        position: relative;
+        font-size: clamp(1.4rem, 1.6vw, 1.7rem);
+    }
+
+    #list-1165 .cs-li:before {
+        /* bullet */
+        content: "";
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-top: 0.5rem;
+        background: var(--secondary);
+        display: block;
+        /* prevents flexbox from squishing it */
+        flex: none;
+    }
+}
